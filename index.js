@@ -162,8 +162,97 @@ function checkKey(e) {
            $spriteWrapper.style.transform = "translateX(" + spritePositionX + "%)"
     }
 
-}
+};
 
+// Mobile Buttons
+
+document.getElementById("left-button").addEventListener("click", function () {
+  if (spritePositionX >= -440) 
+  spritePositionX = spritePositionX - 10;
+  $spriteWrapper.style.transform = "translateX(" + spritePositionX + "%)";
+});
+
+document.getElementById("right-button").addEventListener("click", function () {
+  (spritePositionX <= 440) 
+    spritePositionX = spritePositionX + 10;
+   $spriteWrapper.style.transform = "translateX(" + spritePositionX + "%)";
+});
+
+document.getElementById("fire-button").addEventListener("click", function () {
+  let laser = document.createElement('div');
+  laser.className = "laser";
+  laser.id = 'laser';
+  $spriteWrapper.appendChild(laser);
+  let $laser = document.getElementById('laser');
+  var laserNoise = new Audio ('sfx_laser2.ogg')
+  laserNoise.play()
+  $laser.style.display = "block";
+  $laser.style.visibility = "visible";
+  $laser.style.animation = "";
+  $laser.style.animation = "fire 2s";
+
+    const checkCollision = setInterval(function() {
+
+      for (i = 0; i < $enemy.length; ++i) {
+
+        let rect1 = $enemy[i].getBoundingClientRect();
+        let rect2 = $laser.getBoundingClientRect();
+
+
+        if(rect1.x < rect2.x + rect2.width && 
+          rect1.x + rect1.width > rect2.x && 
+          rect1.y < rect2.y + rect2.height &&
+          rect1.y + rect1.height > rect2.y){
+            score++,
+            $score.innerHTML = ("Score = " + score),
+            $enemy[i].style.display = 'hidden',
+            $enemy[i].className = "dead",
+            $laser.style.display = "none",
+            $laser.style.animation = "",
+            $laser.remove(),
+            console.log('ship hit enemy');
+            checkWinState($enemy.length);
+
+          }
+          
+      }}, 100);
+    
+      const checkRockCollision = setInterval(function() {
+
+        for (i = 0; i < $rock.length; ++i) {
+
+          let rect3 = $rock[i].getBoundingClientRect();
+          let rect4 = $laser.getBoundingClientRect();
+          
+          if(rect3.x < rect4.x + rect4.width && 
+            rect3.x + rect3.width > rect4.x && 
+            rect3.y < rect4.y + rect4.height &&
+            rect3.y + rect3.height > rect4.y){
+              $laser.style.display = "none";
+              $laser.remove();
+              console.log('ship laser impact on rock-' + i);
+              $rock[i].value = $rock[i].value - 10;
+              $rock[i].style.height = $rock[i].value + '%';
+              $rock[i].style.width = $rock[i].value + '%';
+              if ($rock[i].value <= 0) {$rock[i].className ='dead'};
+
+          
+               }
+            
+        }}, 100);
+
+  setTimeout(function (){
+    $laser.remove();
+      $laser.style.visibility = "hidden";
+      clearInterval(checkCollision);             
+      clearInterval(checkRockCollision); 
+
+
+    }, 1000);
+});
+
+
+  
 
 // Enemy Fire
 
@@ -181,8 +270,8 @@ let createEnemyLaser = () => {
     enemyLaser.style.animation = "enemy-fire 1s"
     enemyLaser.id = 'enemy-laser';
     $enemy[randomNumber - 1].appendChild(enemyLaser);
-    // var enemyLaserNoise = new Audio ('sfx_laser1.ogg')
-    // enemyLaserNoise.play()
+    var enemyLaserNoise = new Audio ('sfx_laser1.ogg');
+    // enemyLaserNoise.play();
 
 
 // Fire with Animation
@@ -242,15 +331,15 @@ setTimeout(function (){
 
 // Game State
 
-let checkWinState = (enemiesLeft) => {
+let checkWinState = (enemiesLeft, enemyLaserNoise) => {
 if (enemiesLeft == 0 ) {
   let winMessage = document.createElement('div');
   winMessage.className = "pop-up";
   winMessage.id = 'win-pop-up';
   $arcade.appendChild(winMessage);
   winMessage.innerHTML = '<h1> YOU WIN! </h1>' + '<p> Please Reload </p>';
-  // var winNoise = new Audio ('sfx_win.ogg')
-  // winNoise.play()
+  var winNoise = new Audio ('sfx_win.ogg')
+  winNoise.play()
   
 
 } else if ($spriteWrapper.className === "dead") {
@@ -259,10 +348,9 @@ if (enemiesLeft == 0 ) {
   winMessage.id = 'win-pop-up';
   $arcade.appendChild(winMessage);
   winMessage.innerHTML = '<h1> YOU LOSE </h1>' + '<p> Please Reload </p>';
-  // var loseNoise = new Audio ('sfx_lose.ogg')
-  // loseNoise.play()
-  // enemyLaserNoise.pause()
-  // enemyLaserNoise.currentTime = 0;
+  var loseNoise = new Audio ('sfx_lose.ogg')
+  loseNoise.play()
+
 
 }
 };

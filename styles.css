@@ -178,3 +178,37 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+#left-button{
+    position: absolute;
+    height: 40%;
+    width: 10%;
+    background-color: red;
+}
+
+#right-button{
+    position: absolute;
+    height: 40%;
+    width: 10%;
+    left: 90%;
+    background-color: blue;
+
+}
+
+#fire-button{
+    position: absolute;
+    height: 40%;
+    width: 10%;
+    left: 90%;
+    top: 60%;
+    background-color: blue;
+}
+
+#reload-button{
+    position: absolute;
+    height: 40%;
+    width: 10%;
+    left: 0%;
+    top: 60%;
+    background-color: green;
+}
