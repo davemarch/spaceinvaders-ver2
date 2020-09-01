@@ -184,33 +184,33 @@ body {
 #left-button{
     position: absolute;
     height: 40%;
-    width: 10%;
-    background-color: red;
+    width: 20%;
+    background-color: #F7E045;
 }
 
 #right-button{
     position: absolute;
     height: 40%;
-    width: 10%;
-    left: 90%;
-    background-color: blue;
+    width: 20%;
+    left: 80%;
+    background-color: #F7E045;
 
 }
 
 #fire-button{
     position: absolute;
     height: 40%;
-    width: 10%;
-    left: 90%;
+    width: 20%;
+    left: 80%;
     top: 60%;
-    background-color: blue;
+    background-color: #F7E045;
 }
 
 #reload-button{
     position: absolute;
     height: 40%;
-    width: 10%;
+    width: 20%;
     left: 0%;
     top: 60%;
-    background-color: green;
+    background-color: #F7E045;
 }
