@@ -4,6 +4,8 @@
     box-sizing: border-box;
     font-family: 'Press Start 2P';
     color: white;
+    touch-action: manipulation;
+
 }
 
 html {
