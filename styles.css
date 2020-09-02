@@ -214,3 +214,47 @@ body {
     top: 60%;
     background-color: #F7E045;
 }
+
+.phone-buttons {
+    display: none;
+}
+
+.turnphone {
+    display: none;
+}
+
+@media screen and (max-width: 900px) {
+
+    .phone-buttons {
+        display: block;
+    }
+
+    .turnphone {
+        display: none;
+    }
+  }
+
+  @media screen and (max-width: 500px) {
+    body {
+      background-color: red;
+    }
+
+    .container, #arcade{
+        display: none;
+    }
+
+    .turnphone {
+        position: absolute;
+        display: block;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+    }
+
+    .phone-buttons {
+        display: none;
+    }
+  }
+
+
