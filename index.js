@@ -8,17 +8,21 @@ var $score = document.getElementById('score');
 var $rockArray = document.getElementById('rock-array');
 let $enemy = document.getElementsByClassName('enemy');
 let $arcade = document.getElementById('arcade');
-
-
-
+let $welcomeMessage = document.getElementById('welcome-message');
 
 spritePositionX = 0;
 isOverlapping = false;
 ship = true;  
 score = 0;
 
+$spriteWrapper.style.display = 'none';
 
-$score.innerHTML = ("Score = " + score)
+$score.innerHTML = ("Score = " + score);
+
+let init = () => {
+
+  $spriteWrapper.style.display = 'block';
+  $welcomeMessage.style.display = 'none';
 
 
 // Create Enemy Array
@@ -34,6 +38,7 @@ for (i = 1; i < 16; i++) {
     createEnemy(i);
   }
 ;
+
 
 enemiesLeft = $enemy.length;
 
@@ -55,6 +60,9 @@ for (i = 1; i < 5; i++) {
 }
 ;
 
+
+};
+
 let $rock = document.getElementsByClassName('rock');
 
 // Square Calc
@@ -74,6 +82,10 @@ function checkKey(e) {
 
 
 // Space to fire + collision check
+
+    if (e.keyCode == '13') {
+      init();
+    }
 
     if (e.keyCode == '32') {
         console.log("space Key"); 
@@ -165,6 +177,10 @@ function checkKey(e) {
 };
 
 // Mobile Buttons
+
+document.getElementById("welcome-message-phone").addEventListener("click", function () {
+  init();
+});
 
 document.getElementById("left-button").addEventListener("click", function () {
   if (spritePositionX >= -440) 
