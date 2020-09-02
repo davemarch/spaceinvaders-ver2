@@ -9,6 +9,8 @@ var $rockArray = document.getElementById('rock-array');
 let $enemy = document.getElementsByClassName('enemy');
 let $arcade = document.getElementById('arcade');
 let $welcomeMessage = document.getElementById('welcome-message');
+let $welcomeMessagePhone = document.getElementById('welcome-message-phone');
+
 
 spritePositionX = 0;
 isOverlapping = false;
@@ -21,6 +23,7 @@ $score.innerHTML = ("Score = " + score);
 
 let init = () => {
 
+  $welcomeMessagePhone.style.display = "none";
   $spriteWrapper.style.display = 'block';
   $welcomeMessage.style.display = 'none';
 
@@ -178,8 +181,11 @@ function checkKey(e) {
 
 // Mobile Buttons
 
-document.getElementById("welcome-message-phone").addEventListener("click", function () {
+$welcomeMessagePhone.addEventListener("click", function () {
   init();
+  $welcomeMessagePhone.style.background = "red";
+  
+
 });
 
 document.getElementById("left-button").addEventListener("click", function () {
